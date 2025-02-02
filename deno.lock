@@ -1,0 +1,74 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@std/assert@*": "1.0.11",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
+    "npm:@jxa/global-type@^1.3.6": "1.3.6",
+    "npm:typescript@^5.7.3": "5.7.3"
+  },
+  "jsr": {
+    "@std/assert@1.0.11": {
+      "integrity": "2461ef3c368fe88bc60e186e7744a93112f16fd110022e113a0849e94d1c83c1",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
+    }
+  },
+  "npm": {
+    "@jxa/global-type@1.3.6": {
+      "integrity": "sha512-PVD1wB2giM4RkacP+RfigIoKQ5LqJfDIO6n6UmNxyJnYjznBMU7/hsszSmuAYOrt0IprpjPUSoYafYrD9apoSQ==",
+      "dependencies": [
+        "@jxa/types"
+      ]
+    },
+    "@jxa/types@1.3.6": {
+      "integrity": "sha512-2/RPRx/QH3O3lA6m1Z824+T/ojYQra6HTYwF3PWnENabZwjdUATe2IFzZxFcDd9nR+GHxo5/Lg1VNM99Z8kHEg=="
+    },
+    "typescript@5.7.3": {
+      "integrity": "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="
+    }
+  },
+  "redirects": {
+    "https://deno.land/std/node/child_process.ts": "https://deno.land/std@0.224.0/node/child_process.ts",
+    "https://deno.land/std/node/fs.ts": "https://deno.land/std@0.224.0/node/fs.ts"
+  },
+  "remote": {
+    "https://cdn.skypack.dev/-/@jxa/run@v1.3.6-n6b0reYJMlEc0LyNynxL/dist=es2019,mode=imports/optimized/@jxa/run.js": "43795d4f5482479f44b8f4eba31611fd2432809363806c891a567c226e6c0bac",
+    "https://cdn.skypack.dev/-/macos-version@v5.2.1-h3BmVbZzT11us7nyGJhj/dist=es2019,mode=imports/optimized/macos-version.js": "98be7659a60f3129cc00595d497227636590087bea667120220aff55234ff0a0",
+    "https://cdn.skypack.dev/-/semver@v5.7.1-9nkjxzENOzRR579cekDa/dist=es2019,mode=imports/optimized/semver.js": "ac7a4274abcc295b8122a1176519c35e8130e59edfae265f6265a8533ebf4a20",
+    "https://cdn.skypack.dev/@jxa/run": "146937ae218239b5787d6daa9572f41725cf7c81ef6f1e7a6767084f5ea2b3a1",
+    "https://cdn.skypack.dev/error/node:node:child_process?from=@jxa/run": "631553c5ec380885619a2691c5c3c40fcda228eef860dd40667ec9e4d87acdb8",
+    "https://cdn.skypack.dev/error/node:node:fs?from=macos-version": "7d5c5613d94438dc6352c9ede6fc3679adc4688a4d3f01f806dfc306f7192135",
+    "https://deno.land/x/discord_rpc@0.3.2/deps.ts": "3ae1770c0e75cc18ce4943f8c4f30595b51d7949c8f9297c34536fcfbd1ad584",
+    "https://deno.land/x/discord_rpc@0.3.2/mod.ts": "60900c6d14f21eaebb56babb26f7bdd663ee2be2fce9b108f8531748b9776e17",
+    "https://deno.land/x/discord_rpc@0.3.2/src/client.ts": "8327f1ad0a0f5941001a86a17dcfd37132b48f0e82290b215fd6d102d7f8acfe",
+    "https://deno.land/x/discord_rpc@0.3.2/src/conn.ts": "9fd25db06e2d70951beb4700b333347b649fd35feb3295ceea00e19fe0348d91",
+    "https://deno.land/x/discord_rpc@0.3.2/src/types.ts": "0ea6155131c566f2df6dadf0d8db20364b50d22c7bd3a46e2a80157ccebcdb25",
+    "https://deno.land/x/discord_rpc@0.3.2/src/util.ts": "27cf529418bb0c66d830d31895938367e344785e277f1da18ce09bd11dec5c39",
+    "https://deno.land/x/namedpipe@0.1.2/client.ts": "21d3fdd0815f969bff33363e9743dc0f32d750cce32d47d73f4d0b16b4c51201",
+    "https://deno.land/x/namedpipe@0.1.2/deps.ts": "887765175a2b941907e5a61edb62e1f4fb91cae13c42b6134f4863e9d9c73ba8",
+    "https://deno.land/x/namedpipe@0.1.2/mod.ts": "865f345ff24605453bc6d89d780c0785eb8c75345a01eef6bf66b4fb578e67b9",
+    "https://raw.githubusercontent.com/DjDeveloperr/deno_win32/0.4.1/util.ts": "0f846e01a976601ad4c9839b72df8aaddc65685a16bc658a1bb914e21323e231",
+    "https://win32.deno.dev/0.4.1/Foundation": "4269309575d542c58cc9889a78e7f02d98a0af78f74bcaaf0c7bff52dddb7146",
+    "https://win32.deno.dev/0.4.1/Storage.FileSystem": "6acf3f10fa7b153cf0dc3bdb184a305c67dab28bcca25ec8726b65623f234fa3",
+    "https://win32.deno.dev/0.4.1/System.Diagnostics.Debug": "941ea74c410cf57b05eb9fa6c1ccccf57aee633ffb8a18e41a5496ecbd8b5de8",
+    "https://win32.deno.dev/0.4.1/System.IO": "9c26d0b15a5e1ec5f1765af18b5983ebd920890c52ede231a625384b6ef7a2c4",
+    "https://win32.deno.dev/0.4.1/System.Pipes": "7a1b9870018298d069908e51635f8aa63d1c2cfcdab55e440b50cee04cef87a0",
+    "https://win32.deno.dev/0.4.1/error": "548aa1b5f09f1f39193ce930583180f5e9d7062b2b06a7eea735a4b9f4c45e40",
+    "https://win32.deno.dev/0.4.1/overlapped": "917c33c6d55ee8fb842c764fdd754cc547601a5abe68ad6431043da0768d2478"
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:@jxa/run@^1.3.6"
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@jxa/global-type@^1.3.6",
+        "npm:typescript@^5.7.3"
+      ]
+    }
+  }
+}
