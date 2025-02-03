@@ -4,6 +4,7 @@
     "jsr:@std/assert@*": "1.0.11",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "npm:@jxa/global-type@^1.3.6": "1.3.6",
+    "npm:@jxa/run@^1.3.6": "1.3.6",
     "npm:typescript@^5.7.3": "5.7.3"
   },
   "jsr": {
@@ -24,8 +25,23 @@
         "@jxa/types"
       ]
     },
+    "@jxa/run@1.3.6": {
+      "integrity": "sha512-NqZIYH4AkH7HQ0dGPBiCchO6hEFYUG3ogHoedPgcGIfgv6zNfwKpQ7JGuccG7za+KJLdXDO/F+Da5fa6iY/naw==",
+      "dependencies": [
+        "macos-version"
+      ]
+    },
     "@jxa/types@1.3.6": {
       "integrity": "sha512-2/RPRx/QH3O3lA6m1Z824+T/ojYQra6HTYwF3PWnENabZwjdUATe2IFzZxFcDd9nR+GHxo5/Lg1VNM99Z8kHEg=="
+    },
+    "macos-version@5.2.1": {
+      "integrity": "sha512-OHJU8nTNxHYL1FQhD+nZawWgXKXAqDGr4kluLtaqKO4au3cR41y1mKuVShOU5U4rOYiuPanljq6oFGmV2B9DFA==",
+      "dependencies": [
+        "semver"
+      ]
+    },
+    "semver@5.7.2": {
+      "integrity": "sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g=="
     },
     "typescript@5.7.3": {
       "integrity": "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="
@@ -67,6 +83,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@jxa/global-type@^1.3.6",
+        "npm:@jxa/run@^1.3.6",
         "npm:typescript@^5.7.3"
       ]
     }
