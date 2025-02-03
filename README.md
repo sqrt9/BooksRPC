@@ -15,7 +15,7 @@ With help from:
 
 Contains:
 - TS file for rich presence
-- Quiet user Launch Agent (may have to touch books-rpc.log) plist file
+- Quiet user Launch Agent .plist file
 
 
 You will need homebrew and deno. Deno is a nice JS/TS interpreter with URL imports.
