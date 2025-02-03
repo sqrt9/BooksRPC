@@ -19,7 +19,7 @@ Contains:
 
 
 You will need homebrew and deno. Deno is a nice JS/TS interpreter with URL imports.
-- Launch agents go into ~/Library/LaunchAgents. Check you can run the script (it has the right permissions) with:
+- Launch agents go into ~/Library/LaunchAgents. First check you can run the script (it has the right permissions) with:
   
 deno run --allow-env --allow-run --allow-net --allow-read --allow-write --allow-ffi --allow-import --unstable-kv main.ts
 
