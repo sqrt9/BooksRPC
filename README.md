@@ -31,4 +31,8 @@ Not working?
 - make sure you are the owner of the plist file.
 - plutil main.ts
 
-A good free app for generating/configuring plist files is LaunchControl. launchctl is annoying, and these files are unusually picky...
+A good free app for generating/configuring plist files is LaunchControl. launchctl is annoying, and these files are unusually picky.
+
+How it works --
+
+Since there's no public API for the books app (like there is for music, etc.) it works by scanning the Accessibility API for the books app and grabs the window title of the book you're reading. One pitfall of System Events is that it needs to be rendered on the screen to be found, and the index of other elements (page number) will change if you're moving the window. To fix this, the script will keep searching for valid elements until it gives up and closes the rpc. It's not a problem unless you're flipping through pages continuously ~30 seconds. Because System Events can only (mostly) see rendered elements, the window title is the only info it can gather, so it will search Google Books for your book, try to find a match, if it doesn't, it will fall back to OpenLibrary. With the best result from OpenLibrary it will re-search a stripped title on Google Books again (the only API it can get a cover url from). Hopefully it's assembled by now some good data; it was able to find all the books I'd tested it with. Then, it will try and get a goodreads url by searching DuckDuckGo, and attatch it to a button on your status. It will cache valid results on your computer. It will look for updates every 15 seconds by default. Yay! 
