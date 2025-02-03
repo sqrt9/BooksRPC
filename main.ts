@@ -411,7 +411,7 @@ export async function fetchBookDataExact(title: string): Promise<BookData | null
     console.log("Google Books API response received");
 
     if (!data.items || data.items.length === 0) {
-      console.log("No response or zero result from Google.")
+      console.log("Nothing valid or zero result from Google.")
       throw new Error();
     }
 
