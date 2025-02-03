@@ -1,6 +1,10 @@
 # BooksRPC
 Discord rich-presence for Apple Books in TypeScript with Deno+Kv-caching
 
+<img width="249" alt="image" src="https://github.com/user-attachments/assets/cd572d84-5d3f-4772-b2de-5360eab02b3d" />
+
+
+
 With help from:
 - Google Books API
 - OpenLib API
@@ -12,7 +16,7 @@ With help from:
 Contains:
 -TS file for rich presence
 -Quiet user Launch Agent (may have to touch books-rpc.log) plist file
-<img width="349" alt="image" src="https://github.com/user-attachments/assets/ce6730a9-3fc2-47e2-8771-1fbd0d1ca696" />
+
 
 You will need homebrew and deno. Deno is a nice JS/TS interpreter with URL imports.
 - Launch agents go into ~/Library/LaunchAgents. Check you can run the script (it has the right permissions) with:
