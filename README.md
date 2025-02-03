@@ -1,5 +1,5 @@
 # BooksRPC
-Discord rich-presence for Apple Books in TypeScript with Deno+Kv-caching
+Discord rich-presence for Apple Books in TypeScript with Deno Kv-caching
 
 <img width="249" alt="image" src="https://github.com/user-attachments/assets/cd572d84-5d3f-4772-b2de-5360eab02b3d" />
 
