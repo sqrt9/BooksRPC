@@ -14,8 +14,8 @@ With help from:
 - Inspired by NextFire/Apple Music RPC
 
 Contains:
--TS file for rich presence
--Quiet user Launch Agent (may have to touch books-rpc.log) plist file
+- TS file for rich presence
+- Quiet user Launch Agent (may have to touch books-rpc.log) plist file
 
 
 You will need homebrew and deno. Deno is a nice JS/TS interpreter with URL imports.
