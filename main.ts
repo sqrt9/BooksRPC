@@ -35,8 +35,6 @@ class BooksRPC {
     }
     
     if (bookActivity.state && bookActivity.titled) {
-      console.log(bookActivity.state)
-      console.log(bookActivity.titled)
       // set reading activity
       console.log("Scanning accessibility API...")
       const bookInfo = await getOpenDocumentAndPage();
