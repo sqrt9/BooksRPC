@@ -1,11 +1,12 @@
-#!/usr/bin/env deno run --allow-env --allow-run --allow-net --allow-read --allow-write --allow-ffi --allow-import --unstable-kv
+#!/usr/bin/env deno run --allow-env --allow-run --allow-net --allow-read --allow-write --allow-ffi --allow-import --unstable-kv main.ts
 
 import "npm:@jxa/global-type";
 import { run } from "npm:@jxa/run";
 import { Client } from "https://deno.land/x/discord_rpc@0.3.2/mod.ts";
 import { Activity } from "https://deno.land/x/discord_rpc@0.3.2/mod.ts";
-import { SetFilePointerEx } from "https://win32.deno.dev/0.4.1/Storage.FileSystem";
-import { TIMER_OR_DPC_INVALID } from "https://win32.deno.dev/0.4.1/System.Diagnostics.Debug";
+import { CONTEXT_E_OLDREF } from "https://win32.deno.dev/0.4.1/Foundation";
+// import { SetFilePointerEx } from "https://win32.deno.dev/0.4.1/Storage.FileSystem";
+// import { TIMER_OR_DPC_INVALID } from "https://win32.deno.dev/0.4.1/System.Diagnostics.Debug";
 
 
 class BooksRPC {
@@ -34,6 +35,8 @@ class BooksRPC {
     }
     
     if (bookActivity.state && bookActivity.titled) {
+      console.log(bookActivity.state)
+      console.log(bookActivity.titled)
       // set reading activity
       console.log("Scanning accessibility API...")
       const bookInfo = await getOpenDocumentAndPage();
@@ -85,26 +88,26 @@ class BooksRPC {
             small_image: BooksRPC.appicon,
             small_text: "Apple Books"
           }
-                if(buttonLink){
-                  console.log("Setting button info to " + buttonLink)
-                  const buttons = [];
-                  buttons.push({
-                    label: "View on goodreads",
-                    url: buttonLink});
-                  activity.buttons = buttons;
-                }
+            if(buttonLink){
+              console.log("Setting button info to " + buttonLink)
+              const buttons = [];
+              buttons.push({
+                label: "View on goodreads",
+                url: buttonLink
+              });
+              activity.buttons = buttons;
+            }
+          }
                 console.log("Setting...")
                 await this.rpc.setActivity(activity);
                 console.log("Activity set!")
                 return this.defaultTimeout
-              }
-              console.log("No activity set. Timing out.")
-              return this.defaultTimeout;
+              
             }
           }
-          return this.defaultTimeout
-      }
-
+      console.log("No activity set. Timing out.")
+      return this.defaultTimeout
+    }
 async setActivityLoop(): Promise<void> {
   try{
     console.log("Connecting to discord RPC...")
@@ -112,7 +115,7 @@ async setActivityLoop(): Promise<void> {
     while(true) {
       const timeout = await this.setActivity();
       await sleep(timeout)
-    } 
+    }
     } finally {
       console.log("Closing RPC.")
       this.tryCloseRPC();
@@ -272,8 +275,7 @@ export async function bookState(): Promise<BookState> {
       return { state: true, titled: false };
     }
     console.log("Found matching titled window: " + title)
-    const readingState = true;
-    return { state: isRunning, titled: readingState };
+    return { state: true, titled: true };
   });
   return running as BookState
 }
@@ -294,7 +296,7 @@ export async function getOpenDocumentAndPage(): Promise<BookInfo> {
           "Finished",
           "Books",
           "Audiobooks",
-          "PDFs",
+            "PDFs",
           "My Samples"
         ];
         const SystemEvents = Application("System Events");
@@ -399,7 +401,7 @@ function getSimilarity(str1: string, str2: string): number {
 }
 
 export async function fetchBookDataExact(title: string): Promise<BookData | null> {
-  console.log("fetchBookDataExact called with title:", title);
+  console.log("fetchBookDataExact called with title:", title)
   // First attempt: Google Books API search by title only
   const query = encodeURIComponent(`intitle:"${title}"`);
   const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40`;
@@ -426,6 +428,7 @@ export async function fetchBookDataExact(title: string): Promise<BookData | null
 
     console.log("Exact match found in Google Books");
     const book = exactMatches[0].volumeInfo;
+    console.log(book.authors)
     return {
       authors: book.authors,
       publishedDate: book.publishedDate,
@@ -579,12 +582,12 @@ function sleep(ms: number): Promise<void> {
 
 
 const client = await BooksRPC.init();
+await client.clearKvCache();
+client.tryCloseRPC();
 await client.run();
 
 
 // debug
-// await client.clearKvCache();
-// await client.tryCloseRPC();
 
 // export const getWindowTitles = async () => {
 //   const result = await run(() => {
