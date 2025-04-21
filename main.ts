@@ -98,13 +98,12 @@ class BooksRPC {
               activity.buttons = buttons;
             }
           }
-                console.log("Setting...")
-                await this.rpc.setActivity(activity);
-                console.log("Activity set!")
-                return this.defaultTimeout
-              
-            }
+          console.log("Setting...")
+          await this.rpc.setActivity(activity);
+          console.log("Activity set!")
+          return this.defaultTimeout
           }
+        }
       console.log("No activity set. Timing out.")
       return this.defaultTimeout
     }
@@ -133,12 +132,10 @@ tryCloseRPC(): void {
 }
 
   async checkCacheInfo(bookInfo: BookInfo): Promise<BookData | null> {
-    // Check if the BookData for the given title exists in the KV store
     console.log("Checking Kv cache for BookInfo object.")
     const title = bookInfo.title
     const cachedData = await this.kv.get<BookData>([title]);
     if (cachedData?.value) {
-      // If cached data exists, return it
       console.log("Found cached book!")
       return cachedData.value;
     } else {
@@ -188,10 +185,8 @@ tryCloseRPC(): void {
       await sleep(this.defaultTimeout);
     }
   }
-
 }
 
-// Interfaces for BookState, BookInfo, BookData
 interface BookState {
   state: boolean;
   titled: boolean;
@@ -233,9 +228,7 @@ function truncateAuthors(authors: string[] | undefined): string {
 
 
 export async function bookState(): Promise<BookState> {
-
   const running = await run (() =>  {
-    //need to redeclare so run can see it
     const excludedTitles = [
       "Home",
       "Book Store",
@@ -252,15 +245,12 @@ export async function bookState(): Promise<BookState> {
     const SystemEvents = Application("System Events");
     console.log("Looking for open windows.")
     const isRunning = SystemEvents.processes["Books"].exists();
-    //console.log(isRunning)
     if (!isRunning || isRunning === undefined) {
       return { state: false, titled: false };
     }
 
     const BooksAppUI = SystemEvents.processes.byName("Books");
     const windows = BooksAppUI.windows();
-    // const titles = windows.map(window => window.title());
-    // console.log(titles);
     const mainWindow = windows.find((window: any)=> !excludedTitles.includes(window.title()));
     if (!mainWindow) {
       console.log("No valid main window found.");
