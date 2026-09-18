@@ -1,7 +1,7 @@
 import { Client, SetActivity } from "discord-rpc";
 import { AppleBookType, OLBook } from "./types.ts";
 import { findOpenDocumentAndPage } from "./window.ts";
-import { app_id, default_app_icon, kv, timeout_search } from "./utils.ts";
+import { app_id, default_app_icon, kv, timeout_search, VERSION } from "./utils.ts";
 import { sleep, withTimeout } from "./utils.ts";
 import { timeout_reconnect_rpc, timeout_find_window } from "./utils.ts";
 import { booksIdling } from "./utils.ts";
@@ -128,5 +128,9 @@ process.on("exit", () => {
     kv.close();
     client.destroy();
 });
+
+if (Deno.args.includes("--verson") || Deno.args.includes("-v")) {
+    console.log(VERSION)
+}
 
 loginAndRegisterCallback();

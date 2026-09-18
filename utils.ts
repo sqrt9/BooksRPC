@@ -1,5 +1,6 @@
 import { OLBook } from "./types.ts";
 
+export const VERSION = 0.1
 export const default_app_icon = "https://help.apple.com/assets/67368A9179C56FB1B106D02B/67368A97231AFF3D8A0ADB76/en_US/3805d456c1f34d7f9d4f023a12a0bb67.png"
 export const olbooksearch = new URL("https://openlibrary.org/search.json?q=")
 export const olcoversearch = new URL("https://covers.openlibrary.org/b/id/")
