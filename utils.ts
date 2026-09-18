@@ -14,7 +14,7 @@ export const kv = await Deno.openKv()
 export const booksIdling = {
     applicationId: app_id,
     type: 0,
-    statusDisplayType: 1,
+    statusDisplayType: 0,
     details: "--/--",
     state: "Idling"
 }

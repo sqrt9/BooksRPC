@@ -31,6 +31,7 @@ export function makeReadingStatus(book: AppleBookType | undefined = undefined): 
             name: book.title,
             details: book.author,
             state: progress ? progress : undefined,
+            largeImageUrl: book.cover ? book.cover : undefined,
             largeImageKey: book.cover ? book.cover : undefined,
             largeImageText: book.title ? book.title : undefined,
             smallImageKey: default_app_icon,
