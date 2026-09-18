@@ -44,7 +44,7 @@ jobs:
           deno compile \
             -A \
             --target ${{ matrix.arch }}-apple-darwin \
-            --output booksrpc \
+            --output booksrpc-${{ matrix.arch }} \
             --unstable-kv \
             status.ts
       
