@@ -23,8 +23,8 @@ jobs:
     name: macOS ${{ matrix.arch }}
     runs-on: macos-latest
     strategy:
-    matrix:
-      arch: [x86_64, aarch64]
+      matrix:
+        arch: [x86_64, aarch64]
 
     steps:
       - name: Setup repo
@@ -50,7 +50,7 @@ jobs:
             status.ts
       
       - name: Upload tagged release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with: 
           files: booksrpc-*
         env:
