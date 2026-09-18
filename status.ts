@@ -42,14 +42,15 @@ export function makeReadingStatus(book: AppleBookType | undefined = undefined): 
 
 
 export function loginAndRegisterCallback() {
-    client.on("ready", async () => {
+    client.once("ready", async () => {
         while(true) {
             try {
                 await main();
-                await sleep(timeout_find_window);
+                await sleep(timeout_find_window)
             } catch(err) {
                 console.log(err)
-                await sleep(timeout_find_window);
+                client.destroy()
+                await sleep(timeout_find_window)
             }
         }
     });
