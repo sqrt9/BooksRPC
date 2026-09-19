@@ -42,26 +42,41 @@ export function makeReadingStatus(book: AppleBookType | undefined = undefined): 
 }
 
 
-export function loginAndRegisterCallback() {
-    client.once("ready", async () => {
-        while(true) {
-            try {
-                await main();
-                await sleep(timeout_find_window)
-            } catch(err) {
-                console.log(err)
-                client.destroy()
-                await sleep(timeout_find_window)
-            }
+let isRunning = false;
+
+export async function loginAndRegisterCallback() {
+    client.on("ready", () => {
+        console.log("Client ready");
+        if (!isRunning) {
+            isRunning = true;
+            retry();
         }
     });
 
-    client.on("disconnect", async () => {
-        client.login();
-        await sleep(timeout_reconnect_rpc)
+    client.on("disconnect", () => {
+        console.log("Client disconnected");
+        isRunning = false;
     });
 
-    client.login();
+    client.on("error", (err) => {
+        console.log(err)
+        isRunning = false;
+    });
+
+    await client.login();
+}
+
+async function retry() {
+    while (isRunning) {
+        try {
+            await main();
+            await sleep(timeout_find_window);
+        } catch (err) {
+            console.log(err)
+            client.user?.setActivity({});
+            await sleep(timeout_reconnect_rpc);
+        }
+    }
 }
 
 export async function main() {

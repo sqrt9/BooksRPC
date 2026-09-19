@@ -6,12 +6,7 @@ export async function findOpenDocumentAndPage(): Promise<WindowInfo | void> {
     const document = await run(() => {
         const systemEvents = Application("System Events")
         systemEvents.includeStandardAdditions = true;
-        const booksIsRunning = systemEvents.processes["Books"].exists()
-        const booksAppUI = systemEvents.processes.byName("Books");
-        const openWindows = booksAppUI.windows()
-        const titledWindows = []
-        let page: string | undefined
-        let chapter: string | undefined
+
         // deno-lint-ignore no-explicit-any
         function isPageElement(element: any) {
             if(element.description &&
@@ -30,40 +25,40 @@ export async function findOpenDocumentAndPage(): Promise<WindowInfo | void> {
             return false
         }
         // deno-lint-ignore no-explicit-any
-        function findPageAndOrChapter(element: any) {
+        function findElement(element: any, f: (element: any) => boolean): string | undefined {
+            if (f(element)) return element.description().toLowerCase()
             const children = element.uiElements()
-            for (let i = 0; i < children.length; i++) { //DFS
-                const child = children[i]
-                if (page !== undefined && chapter !== undefined) {
-                    return {page: page, chapter: chapter}
-                } else {
-                    if (isPageElement(children[i])) {
-                        page = child.description().toLowerCase()
-                    }
-                    if (isChapterElement(children[i])) {
-                        chapter = child.description().toLowerCase()
-                    }
+            if (children) {
+                for (let i = 0; i < children.length; i++) {
+                    const found = findElement(children[i], f)
+                    if (found) return found
                 }
-                findPageAndOrChapter(child)
+                return undefined
             }
-            return {page: page, chapter: chapter}
+            return undefined
         }
 
-        if (booksIsRunning) {
-            for (let i = 0; i < openWindows.length; i++) {
-                if (openWindows[i].title().length != 0) {
-                    titledWindows.push(openWindows[i])
-                }
-            }
 
-            for (let i = 0; i < titledWindows.length; i++) {
-                const bookWindow = findPageAndOrChapter(titledWindows[i])
-                if (bookWindow.page !== undefined || bookWindow.chapter !== undefined) {
-                    return {page: bookWindow.page, chapter: bookWindow.chapter, title: titledWindows[i].title()}
-                }
+        const booksAppUI = systemEvents.processes.byName("Books");
+        if (!booksAppUI.exists()) return;
+        const openWindows = booksAppUI.windows()
+        const titledWindows = []
+        
+        for (let i = 0; i < openWindows.length; i++) {
+            if (openWindows[i].title().length !== 0) {
+                titledWindows.push(openWindows[i])
             }
         }
-        return
+
+        for (let i = 0; i < titledWindows.length; i++) {
+            const win = titledWindows[i]
+            const page = findElement(win, isPageElement)
+            const chapter = findElement(win, isChapterElement)
+            if (page !== undefined || chapter !== undefined) {
+                return {page: page, chapter: chapter, title: win.title()}
+            }
+        }
+        throw new Error("No available windows")
     })
     return document as WindowInfo
 } 

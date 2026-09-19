@@ -8,7 +8,7 @@ export const olbooksearchparams = "&fields=cover_i,author_name&limit=10"
 export const olcoversearchparams = "-L.jpg"
 export const app_id = "1335169826661990400"
 export const timeout_find_window = 10000
-export const timeout_reconnect_rpc = 1000
+export const timeout_reconnect_rpc = 5000
 export const timeout_search = 10000
 export const kv = await Deno.openKv()
 export const booksIdling = {
