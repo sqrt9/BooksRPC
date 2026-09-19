@@ -41,7 +41,6 @@ export function makeReadingStatus(book: AppleBookType | undefined = undefined): 
     return BookReadingStatus
 }
 
-
 let isRunning = false;
 
 export async function loginAndRegisterCallback() {
@@ -69,7 +68,7 @@ export async function loginAndRegisterCallback() {
 async function retry() {
     while (isRunning) {
         try {
-            await main();
+            await await withTimeout(() => main(), timeout_find_window);
             await sleep(timeout_find_window);
         } catch (err) {
             console.log(err)
@@ -133,6 +132,7 @@ export async function main() {
         client.user?.setActivity(activity)
 
     } catch(err) {
+        client.user?.setActivity({})
         throw err
     }
 }

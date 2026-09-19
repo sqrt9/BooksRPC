@@ -6,6 +6,21 @@ export async function findOpenDocumentAndPage(): Promise<WindowInfo | void> {
     const document = await run(() => {
         const systemEvents = Application("System Events")
         systemEvents.includeStandardAdditions = true;
+        const excludedTitles = [
+            "Search",
+            "Home",
+            "Book Store",
+            "Audiobook Store",
+            "All",
+            "Want to Read",
+            "Finished",
+            "Books",
+            "Audiobooks",
+            "PDFs",
+            "My Samples",
+            "New Collection",
+            "Account"
+        ]
 
         // deno-lint-ignore no-explicit-any
         function isPageElement(element: any) {
@@ -25,17 +40,18 @@ export async function findOpenDocumentAndPage(): Promise<WindowInfo | void> {
             return false
         }
         // deno-lint-ignore no-explicit-any
-        function findElement(element: any, f: (element: any) => boolean): string | undefined {
+        function findElement(element: any, f: (element: any) => boolean, visited: Set<any> = new Set()): string | undefined {
+            if (visited.has(element)) return undefined
+            visited.add(element)
             if (f(element)) return element.description().toLowerCase()
             const children = element.uiElements()
             if (children) {
                 for (let i = 0; i < children.length; i++) {
-                    const found = findElement(children[i], f)
+                    const found = findElement(children[i], f, visited)
                     if (found) return found
                 }
                 return undefined
             }
-            return undefined
         }
 
 
@@ -45,7 +61,7 @@ export async function findOpenDocumentAndPage(): Promise<WindowInfo | void> {
         const titledWindows = []
         
         for (let i = 0; i < openWindows.length; i++) {
-            if (openWindows[i].title().length !== 0) {
+            if (openWindows[i].title().length !== 0 || !excludedTitles.includes(openWindows[i])) {
                 titledWindows.push(openWindows[i])
             }
         }
