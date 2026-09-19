@@ -72,7 +72,7 @@ async function retry() {
             await sleep(timeout_find_window);
         } catch (err) {
             console.log(err)
-            client.user?.setActivity({});
+            client.destroy();;
             await sleep(timeout_reconnect_rpc);
         }
     }
